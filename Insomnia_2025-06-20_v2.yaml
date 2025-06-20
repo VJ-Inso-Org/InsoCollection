@@ -1,0 +1,119 @@
+type: collection.insomnia.rest/5.0
+name: Endpoint1
+meta:
+  id: wrk_a8e687494f954abe940da6a7a56f49ca
+  created: 1750398965052
+  modified: 1750400046273
+  description: ""
+collection:
+  - name: Endpoint 1
+    meta:
+      id: fld_4f9f576dd1ee4c208eaa457a59b8898f
+      created: 1750398982270
+      modified: 1750399025134
+      sortKey: -1750398979970
+      description: ""
+    children:
+      - url: https://dummy.restapiexample.com/api/v1/employees
+        name: "1.01"
+        meta:
+          id: req_5fa423ca2e994617aabbfd43c0e2d50a
+          created: 1750398982272
+          modified: 1750400074568
+          isPrivate: false
+          description: ""
+          sortKey: -1750400074525
+        method: GET
+        scripts:
+          preRequest: ""
+          afterResponse: "insomnia.test(\"Status code is 200\", function () {\r
+
+            \    insomnia.response.to.have.status(200);\r
+
+            });\r
+
+            \r
+
+            insomnia.test(\"Check Response Status: Success\", () =>  {\r
+
+            \    const jsonData = insomnia.response.json();\r
+
+            \    insomnia.expect(jsonData.status).to.eql('success');\r
+
+            });\r
+
+            \r
+
+            insomnia.test(\"Check for Employee ID '1' at the first position in
+            the response.\", () =>  {\r
+
+            \    const jsonData = insomnia.response.json();\r
+
+            \    const employees = jsonData.data;\r
+
+            \    insomnia.expect(employees[0].id).to.eql(1);\r
+
+            });\r
+
+            \r
+
+            insomnia.test(\"Check Response for the correct employee ammount.\",
+            () =>  {\r
+
+            \    const jsonData = insomnia.response.json();\r
+
+            \    const employees = jsonData.data;\r
+
+            \    insomnia.expect(employees.length).to.eql(24);\r
+
+            });"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://dummy.restapiexample.com/api/v1/employees
+        name: "1.02"
+        meta:
+          id: req_357e7acb418f44b39dc9d2f4368d6a12
+          created: 1750398982273
+          modified: 1750400077113
+          isPrivate: false
+          description: ""
+          sortKey: -1750400074625
+        method: POST
+        scripts:
+          preRequest: ""
+          afterResponse: "insomnia.test(\"Status code is 405: Method Not Allowed\",
+            function () {\r
+
+            \    insomnia.response.to.have.status(405);\r
+
+            });"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    scripts:
+      afterResponse: ""
+      preRequest: ""
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_44cce78450b8a3554521f1f5687f690a418c3274
+    created: 1750398965056
+    modified: 1750399025133
+environments:
+  name: Base Environment
+  meta:
+    id: env_44cce78450b8a3554521f1f5687f690a418c3274
+    created: 1750398965055
+    modified: 1750399025133
+    isPrivate: false
